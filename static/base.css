@@ -1,0 +1,22 @@
+body {
+    padding-top: calc(56px + 10px);
+}
+
+/* Smooth hover effect */
+.nav-link {
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: rgb(72 125 178) !important;
+}
+
+.bg-dark {
+    --bs-bg-opacity: 1;
+    background-color: rgb(97 145 193) !important;
+}
+
+/* Navbar blur + glass effect */
+.navbar {
+    backdrop-filter: blur(10px);
+}

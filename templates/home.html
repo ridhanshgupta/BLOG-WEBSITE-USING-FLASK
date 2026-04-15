@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Flask Blog{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            {% for post in posts %}
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+
+                    <!-- Author + Date -->
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-primary fw-bold">{{ post.author }}</span>
+                        <small class="text-muted">{{ post.date_posted }}</small>
+                    </div>
+
+                    <!-- Title -->
+                    <h4 class="card-title">
+                        <a href="#" class="text-decoration-none text-dark">
+                            {{ post.title }}
+                        </a>
+                    </h4>
+
+                    <!-- Content -->
+                    <p class="card-text">{{ post.content }}</p>
+
+                    <!-- Button -->
+                    <a href="#" class="btn btn-outline-primary btn-sm">
+                        Read More
+                    </a>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">About This Blog</h5>
+                    <p class="card-text">
+                        This is a simple Flask blog project where you can share posts and ideas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
