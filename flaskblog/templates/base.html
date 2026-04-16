@@ -1,66 +1,81 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Flask Blog{% endblock %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
-</head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% if title %}
+    <title>Flask Blog - {{ title }}</title>
+    {% else %}
+    <title>Flask Blog</title>
+    {% endif %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='base.css') }}"
+    />
+  </head>
   <body>
+    <header class="site-header">
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top py-3"
+      >
+        <div class="container">
+          <!-- Logo / Brand -->
+          <a class="navbar-brand fw-bold fs-4" href="/"> 🚀 FlaskBlog </a>
 
-<header class="site-header">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top py-3">
-    <div class="container">
+          <!-- Mobile Toggle -->
+          <button
+            class="navbar-toggler border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarToggle"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-      <!-- Logo / Brand -->
-      <a class="navbar-brand fw-bold fs-4" href="/">
-        🚀 FlaskBlog
-      </a>
+          <!-- Navbar Content -->
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <!-- Left Links -->
+            <div class="navbar-nav me-auto ms-3">
+              <a class="nav-link px-3" href="/">Home</a>
+              <a class="nav-link px-3" href="/about">About</a>
+            </div>
 
-      <!-- Mobile Toggle -->
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <!-- Right Side -->
+            <div class="navbar-nav align-items-center">
+              {% if current_user.is_authenticated %}
+              <a class="nav-link px-3" href="{{ url_for('account') }}">Hello, {{ current_user.username }}!</a>
+              <a class="nav-link px-3" href="{{ url_for('logout') }}">Logout</a>
+              {% else %}
 
-      <!-- Navbar Content -->
-      <div class="collapse navbar-collapse" id="navbarToggle">
+              <a class="nav-link px-3" href="/login">Login</a>
+              <a
+                class="btn btn-primary rounded-pill px-4 ms-2"
+                href="{{ url_for('register') }}"
+              >
+                Get Started
+              </a>
 
-        <!-- Left Links -->
-        <div class="navbar-nav me-auto ms-3">
-          <a class="nav-link px-3" href="/">Home</a>
-          <a class="nav-link px-3" href="/about">About</a>
-        </div>
-
-        <!-- Right Side -->
-        <div class="navbar-nav align-items-center">
-
-          <a class="nav-link px-3" href="/login">Login</a>
-
-          <a class="btn btn-primary rounded-pill px-4 ms-2" href="{{ url_for('register') }}">
-            Get Started
-          </a>
-
-        </div>
-      </div>
-    </div>
-  </nav>
-</header>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div class="alert alert-{{ category }}" role="alert">
-            {{ message }}
+              {% endif %}
+            </div>
           </div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+        </div>
+      </nav>
+    </header>
 
-
-    {% block content %}
-      
-    {% endblock %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+    {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
