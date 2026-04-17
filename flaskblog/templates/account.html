@@ -1,6 +1,68 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block content %}
 
-{% block content %}
+<div class="row">
+  <!-- LEFT SIDE -->
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <img
+            class="rounded-circle account-img me-3"
+            src="{{ profile_image }}"
+            alt="Profile Picture"
+          />
 
-<h1>Account</h1>
-{% endblock %}
+          <div class="media-body">
+            <h2 class="account-heading">{{ current_user.username }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
+          </div>
+        </div>
+
+        <div class="container mt-4">
+          <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+              {{ form.username.label(class="form-label") }} {{
+              form.username(class="form-control") }} {% for error in
+              form.username.errors %}
+              <div class="text-danger small mt-1">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <div class="mb-3">
+              {{ form.email.label(class="form-label") }} {{
+              form.email(class="form-control") }} {% for error in
+              form.email.errors %}
+              <div class="text-danger small mt-1">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <div class="mb-3">
+              {{ form.profile_picture.label(class="form-label") }} {{
+              form.profile_picture(class="form-control") }} {% if
+              form.profile_picture.errors %} {% for error in
+              form.profile_picture.errors %}
+              <div class="text-danger small mt-1">{{ error }}</div>
+              {% endfor %} {% endif %}
+            </div>
+
+            {{ form.submit(class="btn btn-primary") }}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="col-md-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">About This Blog</h5>
+        <p class="card-text">
+          This is a simple Flask blog project where you can share posts and
+          ideas.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
