@@ -6,7 +6,6 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8">
-      {% for post in posts %}{% for post in posts %}
       <article class="media content-section p-3 mb-4 border rounded shadow-sm">
         <div class="d-flex">
           <!-- Profile image left -->
@@ -27,24 +26,87 @@
               <small class="text-muted">
                 {{ post.date_posted.strftime('%Y-%m-%d') }}
               </small>
+              {% if post.author == current_user %}
+              <a
+                class="btn btn-outline-primary btn-sm"
+                href="{{ url_for('update_post', post_id=post.id) }}"
+                >Update</a
+              >
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                data-bs-toggle="modal"
+                data-bs-target="#deleteModal"
+              >
+                Delete
+              </button>
+              {% endif %}
             </div>
 
             <!-- Title -->
-            <h2>
-              <a class="article-title text-dark text-decoration-none" href="#">
-                {{ post.title }}
-              </a>
-            </h2>
+            <h2 class="article-title">{{ post.title }}</h2>
 
             <!-- Content -->
             <p class="article-content">{{ post.content }}</p>
           </div>
         </div>
       </article>
-      {% endfor %} {% endfor %}
+
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="deleteModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="deleteModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Delete Post </h5>
+              <!-- <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              > -->
+                <!-- <span aria-hidden="true">&times;</span> -->
+              </button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete this post?
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    
+    <!-- Sidebar -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">About This Blog</h5>
+          <p class="card-text">
+            This is a simple Flask blog project where you can share posts and
+            ideas.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

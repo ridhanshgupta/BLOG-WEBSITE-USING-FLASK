@@ -8,34 +8,52 @@
     <div class="row">
         <div class="col-md-8">
 
-            {% for post in posts %}
-            <div class="card mb-4 shadow-sm">
-                <div class="card-body">
+{% for post in posts %}
+<article class="media content-section p-3 mb-4 shadow-sm border rounded bg-white">
 
-                    <!-- Author + Date -->
-                    <div class="d-flex justify-content-between mb-2">
-                        <span class="text-primary fw-bold">{{ post.author }}</span>
-                        <small class="text-muted">{{ post.date_posted }}</small>
-                    </div>
+    <!-- Post Header -->
+    <div class="d-flex">
+        
+        <!-- Profile Image -->
+        <img class="rounded-circle article-img me-3"
+             src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
+             style="width:65px; height:65px;"
+             alt="Profile Picture">
 
-                    <!-- Title -->
-                    <h4 class="card-title">
-                        <a href="#" class="text-decoration-none text-dark">
-                            {{ post.title }}
-                        </a>
-                    </h4>
+        <!-- Post Content -->
+        <div class="media-body w-100">
 
-                    <!-- Content -->
-                    <p class="card-text">{{ post.content }}</p>
+            <!-- Author + Date (same line) -->
+            <div class="article-metadata border-bottom pb-2 mb-2">
+                <a class="me-2 text-primary fw-bold text-decoration-none"
+                   href="#">
+                   {{ post.author.username }}
+                </a>
 
-                    <!-- Button -->
-                    <a href="#" class="btn btn-outline-primary btn-sm">
-                        Read More
-                    </a>
-
-                </div>
+                <small class="text-muted">
+                    {{ post.date_posted.strftime('%Y-%m-%d') }}
+                </small>
             </div>
-            {% endfor %}
+
+            <!-- Title -->
+            <h2>
+                <a class="article-title text-dark text-decoration-none"
+                   href="{{ url_for('post', post_id=post.id) }}">
+                   {{ post.title }}
+                </a>
+            </h2>
+
+            <!-- Content -->
+            <p class="article-content">
+                {{ post.content }}
+            </p>
+
+        </div>
+
+    </div>
+
+</article>
+{% endfor %}
 
         </div>
 
