@@ -70,8 +70,7 @@ README.md
 ---
 
 ## 🔮 Future Improvements
-
-- Edit/Delete Posts  
+ 
 - Comments  
 - Password Reset  
 - Search Feature  

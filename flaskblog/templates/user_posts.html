@@ -2,7 +2,11 @@
 
 <!-- {% block title %}Home - Flask Blog{% endblock %} -->
 
+
+
 {% block content %}
+
+<h1 class="mb-3">Posts by {{ user.username }} ({{ posts.total }})</h1>
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8">
@@ -60,11 +64,11 @@
       {% for page_num in posts.iter_pages() %} 
       {% if page_num %}
       {% if page_num == posts.page %}
-      <a class="btn btn-primary me-1" href="{{ url_for('home', page=page_num) }}">
+      <a class="btn btn-primary me-1" href="{{ url_for('user_posts', username=user.username, page=page_num) }}">
         {{ page_num }}
       </a>
       {% else %}
-      <a class="btn btn-outline-primary me-1" href="{{ url_for('home', page=page_num) }}">
+      <a class="btn btn-outline-primary me-1" href="{{ url_for('user_posts', username=user.username, page=page_num) }}">
         {{ page_num }}
       </a>
       {% endif %}
