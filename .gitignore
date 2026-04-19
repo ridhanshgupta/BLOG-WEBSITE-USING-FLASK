@@ -3,3 +3,10 @@
 
 # Ignore database folder
 instance/
+
+# Ignore python chache files
+flaskblog/__pycache__/
+
+# Ignore profile pics data
+flaskblog/static/profile_pics/*
+!flaskblog/static/profile_pics/default.jpg
