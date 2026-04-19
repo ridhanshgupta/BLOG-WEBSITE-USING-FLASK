@@ -12,6 +12,7 @@ A simple blog web application built with Flask where users can register, log in,
 - Profile Image Upload
 - SQLite Database
 - Responsive Bootstrap UI
+- Edit & Delete Post
 
 ---
 
