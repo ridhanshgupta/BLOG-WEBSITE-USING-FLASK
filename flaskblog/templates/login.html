@@ -32,11 +32,11 @@
 </div>
         {{ form.submit(class="btn btn-primary") }}
     <small class="form-text text-muted">
-        <a href="{{ url_for('reset_request') }}">Forgot Password?</a>
+        <a href="{{ url_for('users.reset_request') }}">Forgot Password?</a>
     </small>
     </form>
 </div>
 <div class="border-top pt-3">
-    <small class="text-muted">Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</small>
+    <small class="text-muted">Don't have an account? <a href="{{ url_for('users.register') }}">Register here</a>.</small>
 </div>
 {% endblock %}

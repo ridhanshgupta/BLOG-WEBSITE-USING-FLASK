@@ -1,41 +1,86 @@
-from pathlib import Path
-import os
+# from pathlib import Path
+# from flask import Flask
+# from flask_bcrypt import Bcrypt
+# from flask_sqlalchemy import SQLAlchemy
+# from flask_login import LoginManager
+# from flask_mail import Mail
+# from flaskblog.config import Config   
+
+# app = Flask(__name__)
+# app.config.from_object(Config)        
+
+# db = SQLAlchemy(app)
+# bcrypt = Bcrypt(app)
+# mail = Mail(app)
+
+# login_manager = LoginManager(app)
+# login_manager.login_view = "users.login"
+# login_manager.login_message_category = "info"
+
+# from flaskblog.main.routes import main
+# from flaskblog.users.routes import users
+# from flaskblog.posts.routes import posts
+
+# app.register_blueprint(main)
+# app.register_blueprint(users)
+# app.register_blueprint(posts)
+
+# with app.app_context():
+#     db.create_all()
+
+# def create_app(config_class=Config):
+#     app = Flask(__name__)
+#     app.config.from_object(Config)
+
+#     db.init_app(app)
+#     bcrypt.init_app(app)
+#     login_manager.init_app(app)
+#     mail.init_app(app)
+
+#     from flaskblog.users.routes import users
+#     from flaskblog.posts.routes import posts
+#     from flaskblog.main.routes import main
+#     app.register_blueprint(users)
+#     app.register_blueprint(posts)
+#     app.register_blueprint(main)
+
+#     return app
+
+
 from flask import Flask
-from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
 
-app = Flask(__name__)
-app.config["SECRET_KEY"] = "b310c5a1d69dfc89caf329e2382c4438"
+from flaskblog.config import Config
 
-BASE_DIR = Path(app.root_path).parent
-DB_PATH = BASE_DIR / "instance" / "site.db"
-DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-
-app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH.as_posix()}"
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
+db = SQLAlchemy()
+bcrypt = Bcrypt()
 mail = Mail()
+login_manager = LoginManager()
 
-login_manager = LoginManager(app)
-login_manager.login_view = "login"
+login_manager.login_view = "users.login"
 
-login_manager.login_view = "login"
-login_manager.login_message_category = "info"
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 587
-app.config["MAIL_USE_TLS"] = True
 
-app.config["MAIL_USERNAME"] = "guptaridhansh@gmail.com"
-app.config["MAIL_PASSWORD"] = "webumvdqqaqmhblj"
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
-mail.init_app(app)
+    db.init_app(app)
+    bcrypt.init_app(app)
+    mail.init_app(app)
+    login_manager.init_app(app)
 
-from flaskblog import routes
-from flaskblog.models import Post, User
+    from flaskblog.main.routes import main
+    from flaskblog.users.routes import users
+    from flaskblog.posts.routes import posts
 
-with app.app_context():
-    db.create_all()
+    app.register_blueprint(main)
+    app.register_blueprint(users)
+    app.register_blueprint(posts)
+
+    with app.app_context():
+        db.create_all()
+
+    return app

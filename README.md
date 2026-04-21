@@ -1,18 +1,25 @@
 # Blog Website Using Flask
 
-A simple blog web application built with Flask where users can register, log in, create posts, and manage profiles.
+A full-featured blog web application built with Flask that supports authentication, post management, user profiles, password reset, and role-based content ownership.
 
 ---
 
 ## 🚀 Features
 
-- User Authentication
-- Create Blog Posts
+- User Registration & Login Authentication
+- Create, Edit & Delete Blog Posts (CRUD)
+- Author-Based Post Ownership & Access Control
 - User Profiles
 - Profile Image Upload
-- SQLite Database
-- Responsive Bootstrap UI
-- Edit & Delete Post
+- Password Reset via Email
+- Secure Token-Based Reset Links (ItsDangerous)
+- Pagination for Blog Posts
+- Flash Messages & User Feedback Alerts
+- Form Validation using Flask-WTF
+- Session Management with Flask-Login
+- SQLite Database Integration
+- Responsive UI with Bootstrap
+- Custom Error Pages (404/500)
 
 ---
 
@@ -23,6 +30,7 @@ A simple blog web application built with Flask where users can register, log in,
 | Backend | Flask, Python |
 | Database | SQLite, SQLAlchemy |
 | Authentication | Flask-Login |
+| Security / Token Handling | ItsDangerous |
 | Forms | Flask-WTF |
 | Frontend | HTML, CSS, Bootstrap, Jinja2 |
 
@@ -59,9 +67,10 @@ python run.py
 flaskblog/
 │── static/
 │── templates/
-│── forms.py
+│── main/
+│── users/
+│── posts/
 │── models.py
-│── routes.py
 │── __init__.py
 
 run.py
@@ -72,8 +81,7 @@ README.md
 
 ## 🔮 Future Improvements
  
-- Comments  
-- Password Reset  
+- Comments    
 - Search Feature  
 - Deployment  
 

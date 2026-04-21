@@ -10,3 +10,6 @@ flaskblog/__pycache__/
 # Ignore profile pics data
 flaskblog/static/profile_pics/*
 !flaskblog/static/profile_pics/default.jpg
+
+# Ignore .env file
+.env
