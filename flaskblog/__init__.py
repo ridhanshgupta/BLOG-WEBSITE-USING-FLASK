@@ -75,10 +75,13 @@ def create_app():
     from flaskblog.main.routes import main
     from flaskblog.users.routes import users
     from flaskblog.posts.routes import posts
+    from flaskblog.errors.handlers import errors
+
 
     app.register_blueprint(main)
     app.register_blueprint(users)
     app.register_blueprint(posts)
+    app.register_blueprint(errors)
 
     with app.app_context():
         db.create_all()
