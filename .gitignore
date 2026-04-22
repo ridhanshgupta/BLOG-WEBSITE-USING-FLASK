@@ -13,3 +13,8 @@ flaskblog/static/profile_pics/*
 
 # Ignore .env file
 .env
+
+# Ignore python chache files of main , users and posts
+flaskblog/main/__pycache__/
+flaskblog/users/__pycache__/
+flaskblog/posts/__pycache__/
