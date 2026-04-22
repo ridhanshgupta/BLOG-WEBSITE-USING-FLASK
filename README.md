@@ -19,7 +19,7 @@ A full-featured blog web application built with Flask that supports authenticati
 - Session Management with Flask-Login
 - SQLite Database Integration
 - Responsive UI with Bootstrap
-- Custom Error Pages (404/500)
+- Custom Error Pages (403/404/500)
 
 ---
 
